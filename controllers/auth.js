@@ -161,7 +161,7 @@ exports.signin = (req, res) => {
 
 exports.requireSignin = expressJwt({
     secret: process.env.JWT_SECRET,
-    algorithms: ['RS256']
+    algorithms: ['HS256']
 });
 
 exports.adminMiddleware = (req, res, next) => {
@@ -194,7 +194,7 @@ exports.forgotPassword = (req, res) => {
         }
 
         const token = jwt.sign({ _id: user._id, name: user.name }, process.env.JWT_RESET_PASSWORD, {
-            expiresIn: '10m'
+            expiresIn: '60m'
         });
 
         const emailData = {
